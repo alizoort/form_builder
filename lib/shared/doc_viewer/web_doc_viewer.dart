@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
 import 'base_doc_viewer.dart';
 
 class DocViewer extends BaseDocViewer {
   @override
-  Future<String> getFile(BuildContext context) async{
+  Future<String> openFile(dynamic file) async{
     print("INSIDE WEB ");
     return "web";
   }

@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:modee_emrc_app/emrc_upload_component.dart';
-import 'package:modee_emrc_app/shared/doc_viewer/stub_doc_viewer.dart'
-if(dart.library.io) 'package:modee_emrc_app/shared/doc_viewer/android_doc_viewer.dart'
-if(dart.library.html) 'package:modee_emrc_app/shared/doc_viewer/web_doc_viewer.dart';
-import 'package:modee_emrc_app/shared/providers/boot_provider.dart';
-import 'package:provider/provider.dart';
 
 class EMRCFORM extends StatefulWidget {
   const EMRCFORM({super.key});
@@ -20,8 +16,6 @@ class _EMRCFORMState extends State<EMRCFORM> {
   bool readOnly = false;
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _ageHasError = false;
-  bool _genderHasError = false;
   var genderOptions = ['Male','Female','Other'];
   void _onChanged(dynamic val) => debugPrint(val.toString());
   @override
@@ -39,20 +33,30 @@ class _EMRCFORMState extends State<EMRCFORM> {
       skipDisabled: true,
       child: ListView(
         children: <Widget>[
+          FormBuilderTextField(
+
+            name: 'email',
+            decoration: const InputDecoration(labelText: 'Email'),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(),
+              FormBuilderValidators.email(),
+            ]),
+          ),
+          const SizedBox(height: 10),
+          FormBuilderTextField(
+            name: 'password',
+            decoration: const InputDecoration(labelText: 'Password'),
+            obscureText: true,
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(),
+            ]),
+          ),
           UploadComponent(),
           ElevatedButton(
             onPressed: () {
               _formKey.currentState?.validate();
             },
             child: Text("Submit")
-          ),
-          ElevatedButton(
-              onPressed: () {
-                if(Provider.of<BootProvider>(context,listen:false).selectedDocumentName.isNotEmpty){
-                  DocViewer().getFile(context);
-                }
-              },
-              child: Text("Submit")
           )
         ]
       )

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 abstract class BaseDocViewer {
-  Future<String> getFile(BuildContext context);
+  Future<String> openFile(dynamic file);
 }
