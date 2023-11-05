@@ -6,4 +6,7 @@ Electricity {
     document : string { #UploadInput };
     passport : string { #UploadInput };
     idDocument : string { #UploadInput };
+    phoneNumber : string { #TextInput };
+    email : string { #TextInput };
+    description : string { #TextInput };
 }

@@ -4,8 +4,6 @@ import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:modee_emrc_app/services/electricity-service/electricity-service.dart';
 import 'package:modee_emrc_app/shared/enums/screen_enum.dart';
 
-import 'emrc_form.dart';
-
 class BootComp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {

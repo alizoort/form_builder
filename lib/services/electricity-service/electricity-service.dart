@@ -66,7 +66,31 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                           padding: const EdgeInsets.all(8.0),
                           child: UploadComponent (fieldName:'idDocument',label:'idDocument',validators:[FormBuilderValidators.required()]),
                         )),
-                                                                      ]
+                                                                                                   ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'phoneNumber', label: 'phoneNumber',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                           ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'email', label: 'email',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                           ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'description', label: 'description',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                              ]
                   );
                 }
               )
