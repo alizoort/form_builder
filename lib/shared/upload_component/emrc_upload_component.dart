@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:modee_emrc_app/shared/upload_component/constants.dart';
 import 'package:modee_emrc_app/shared/utility_service/stub_platform_utility_service.dart'
 if (dart.library.io) 'package:modee_emrc_app/shared/utility_service/android_platform_utility_service.dart'
 if (dart.library.html) 'package:modee_emrc_app/shared/utility_service/web_platform_utility_service.dart';
@@ -9,7 +10,11 @@ import 'package:modee_emrc_app/shared/doc_viewer/stub_doc_viewer.dart'
 if(dart.library.io) 'package:modee_emrc_app/shared/doc_viewer/android_doc_viewer.dart'
 if(dart.library.html) 'package:modee_emrc_app/shared/doc_viewer/web_doc_viewer.dart';
 class UploadComponent extends StatefulWidget {
-   const UploadComponent({super.key});
+   final String label;
+   final InputDecoration decoration;
+   final String fieldName;
+   final List<String? Function(String?)> validators;
+   const UploadComponent({super.key,required this.fieldName,required this.label,this.decoration = kUploadInputDecoration,this.validators=const []});
 
 
   @override
@@ -21,24 +26,18 @@ class _UploadComponentState extends State<UploadComponent> {
   @override
   Widget build(BuildContext context) {
     return FormBuilderField(
-      name:"uploadComponent",
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required()
-      ]),
+      name:widget.fieldName,
+      validator: FormBuilderValidators.compose(widget.validators),
       builder: (FormFieldState<dynamic> field){
         return InputDecorator(
-          decoration: InputDecoration(
-            labelText:"Upload your document",
-            contentPadding: const EdgeInsets.all(8.0),
-            border: InputBorder.none,
-            errorText: field.errorText
-          ),
+          decoration: widget.decoration.copyWith(labelText: widget.label,errorText: field.errorText),
           child: GestureDetector(
             onTap: ()async{
               FilePickerResult? result = await PlatformUtilityService().pickFile();
               if (result != null) {
               setState((){
                 selectedDocument = result.files.first;
+                field.didChange(result.files.first.name);
               });
               } else {
                 // User canceled the picker
@@ -68,6 +67,7 @@ class _UploadComponentState extends State<UploadComponent> {
                   child: GestureDetector(onTap:(){
                     setState(() {
                       selectedDocument=null;
+                      field.didChange(null);
                     });
                   },child: const Icon(Icons.delete)),
                 ),

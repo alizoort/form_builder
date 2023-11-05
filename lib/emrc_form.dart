@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:modee_emrc_app/emrc_upload_component.dart';
+import 'package:modee_emrc_app/shared/text_input_component/emrc_text_input_component.dart';
+import 'package:modee_emrc_app/shared/upload_component/emrc_upload_component.dart';
 
 class EMRCFORM extends StatefulWidget {
   const EMRCFORM({super.key});
@@ -17,14 +18,14 @@ class _EMRCFORMState extends State<EMRCFORM> {
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
   var genderOptions = ['Male','Female','Other'];
-  void _onChanged(dynamic val) => debugPrint(val.toString());
+  void onChanged(dynamic val) => debugPrint(val.toString());
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
       key: _formKey,
       onChanged: (){
         _formKey.currentState?.save();
-        debugPrint(_formKey.currentState?.value.toString());
+      //  debugPrint(_formKey.currentState?.value.toString());
       },
       autovalidateMode: AutovalidateMode.disabled,
       initialValue: const {
@@ -33,25 +34,11 @@ class _EMRCFORMState extends State<EMRCFORM> {
       skipDisabled: true,
       child: ListView(
         children: <Widget>[
-          FormBuilderTextField(
-
-            name: 'email',
-            decoration: const InputDecoration(labelText: 'Email'),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-              FormBuilderValidators.email(),
-            ]),
-          ),
+          TextInputComponent(fieldName: "email", label: "Email",validators: [  FormBuilderValidators.required(),
+            FormBuilderValidators.email()]),
           const SizedBox(height: 10),
-          FormBuilderTextField(
-            name: 'password',
-            decoration: const InputDecoration(labelText: 'Password'),
-            obscureText: true,
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-            ]),
-          ),
-          UploadComponent(),
+          TextInputComponent(onChanged:onChanged,fieldName: "password", label: "Password",obscureText: true,validators: [FormBuilderValidators.required()],),
+          UploadComponent(fieldName:"passportInput",label:"Passport document",validators:[FormBuilderValidators.required()]),
           ElevatedButton(
             onPressed: () {
               _formKey.currentState?.validate();
