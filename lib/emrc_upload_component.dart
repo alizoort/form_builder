@@ -9,7 +9,7 @@ import 'package:modee_emrc_app/shared/doc_viewer/stub_doc_viewer.dart'
 if(dart.library.io) 'package:modee_emrc_app/shared/doc_viewer/android_doc_viewer.dart'
 if(dart.library.html) 'package:modee_emrc_app/shared/doc_viewer/web_doc_viewer.dart';
 class UploadComponent extends StatefulWidget {
-   UploadComponent({super.key});
+   const UploadComponent({super.key});
 
 
   @override
@@ -17,7 +17,7 @@ class UploadComponent extends StatefulWidget {
 }
 
 class _UploadComponentState extends State<UploadComponent> {
-  dynamic selectedDocument;
+  PlatformFile? selectedDocument;
   @override
   Widget build(BuildContext context) {
     return FormBuilderField(
@@ -35,9 +35,8 @@ class _UploadComponentState extends State<UploadComponent> {
           ),
           child: GestureDetector(
             onTap: ()async{
-              FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true,withData:true,withReadStream: true);
+              FilePickerResult? result = await PlatformUtilityService().pickFile();
               if (result != null) {
-              await   PlatformUtilityService().downloadFile(result.files.first);
               setState((){
                 selectedDocument = result.files.first;
               });
@@ -45,26 +44,41 @@ class _UploadComponentState extends State<UploadComponent> {
                 // User canceled the picker
               }
             },
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Row (children: [
-                      const Icon(Icons.attach_file),
-                      Expanded (
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row (children: [
+                    const Icon(Icons.attach_file),
+                    if(selectedDocument!=null)  Expanded (
+                      child: GestureDetector(
+                        onTap:(){
+                           DocViewer().openFile(selectedDocument!);
+                        },
                         child: Padding (
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(selectedDocument!=null ? selectedDocument.name : ""),
+                          child: Text(selectedDocument!=null ? selectedDocument?.name as String: ""),
                         ),
-                      )
-                    ]),
-                  ),
-                  GestureDetector(onTap:(){
-                    DocViewer().openFile(selectedDocument);
-                  },child: const Icon(Icons.download))
-                ]
-              )
+                      ),
+                    )
+                  ]),
+                ),
+                if(selectedDocument!=null) Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(onTap:(){
+                    setState(() {
+                      selectedDocument=null;
+                    });
+                  },child: const Icon(Icons.delete)),
+                ),
+                if(selectedDocument!=null) Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(onTap:()async{
+                      await   PlatformUtilityService().downloadFile(selectedDocument as PlatformFile);
+                      DocViewer().openFile(selectedDocument!);
+                  },child: const Icon(Icons.download)),
+                )
+              ]
             ),
           )
         );

@@ -18,15 +18,6 @@ class BootComp extends StatelessWidget{
       ],
       initialRoute: '/${Screen.homeView.toShortString()}',
       routes: {
-        // '/${Screen.docView.toShortString()}':(context){
-        //   return Scaffold(
-        //       appBar: AppBar(title: Text("EMRC APP")),
-        //       body: const Padding(
-        //         padding: EdgeInsets.only(left: 15,right: 15,top: 8,bottom: 8),
-        //         child: DocViewer(),
-        //       )
-        //   );
-        // },
         '/${Screen.homeView.toShortString()}':(context){
           return Scaffold(
               appBar: AppBar(title: Text("EMRC APP")),
