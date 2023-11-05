@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
+import 'package:modee_emrc_app/services/electricity-service/electricity-service.dart';
 import 'package:modee_emrc_app/shared/enums/screen_enum.dart';
 
 import 'emrc_form.dart';
@@ -23,7 +24,7 @@ class BootComp extends StatelessWidget{
               appBar: AppBar(title: Text("EMRC APP")),
               body: const Padding(
                 padding: EdgeInsets.only(left: 15,right: 15,top: 8,bottom: 8),
-                child: EMRCFORM(),
+                child: ElectricityEMRCService(),
               )
           );
         }
