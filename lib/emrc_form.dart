@@ -15,9 +15,7 @@ class EMRCFORM extends StatefulWidget {
 class _EMRCFORMState extends State<EMRCFORM> {
   bool autoValidate = true;
   bool readOnly = false;
-  bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  var genderOptions = ['Male','Female','Other'];
   void onChanged(dynamic val) => debugPrint(val.toString());
   @override
   Widget build(BuildContext context) {

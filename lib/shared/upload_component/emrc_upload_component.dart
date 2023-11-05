@@ -35,7 +35,6 @@ class _UploadComponentState extends State<UploadComponent> {
             onTap: ()async{
               FilePickerResult? result = await PlatformUtilityService().pickFile();
               if (result != null) {
-                print("RESULT ${result.files.first}");
               setState((){
                 selectedDocument = result.files.first;
                 field.didChange(result.files.first.name);
