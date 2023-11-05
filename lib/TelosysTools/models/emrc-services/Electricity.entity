@@ -9,4 +9,5 @@ Electricity {
     phoneNumber : string { #TextInput };
     email : string { #TextInput };
     description : string { #TextInput };
+    gender: string { #DropdownInput};
 }
