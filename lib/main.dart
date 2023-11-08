@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:modee_emrc_app/shared/providers/boot_provider.dart';
+import 'package:modee_emrc_app/shared/configurations/environment.dart';
+import 'package:modee_emrc_app/services/electricity-service/electricity-service-provider.dart';
 import 'package:provider/provider.dart';
 
 import 'boot_comp.dart';
 
 void main() {
+ const String environment = String.fromEnvironment(
+    'ENVIRONMENT',
+    defaultValue: Environment.LOCAL,
+  );
+ Environment().initConfig(environment);
   runApp(const MyApp());
 }
 
@@ -14,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers:[ChangeNotifierProvider(create: (context)=>BootProvider())],
+      providers:[ChangeNotifierProvider(create: (context)=>ElectricityServiceProvider())],
       child: BootComp()
     );
   }

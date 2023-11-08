@@ -23,9 +23,11 @@ class TextInputComponent extends StatefulWidget {
 }
 
 class _TextInputComponentState extends State<TextInputComponent> {
+  final GlobalKey<FormBuilderFieldState> _textInputFieldKey = GlobalKey<FormBuilderFieldState>();
   @override
   Widget build(BuildContext context) {
     return  FormBuilderTextField(
+      key:_textInputFieldKey,
       cursorColor:kTextInputFocusColor,
       valueTransformer: widget.valueTransformer,
       maxLines: widget.maxLines,
@@ -34,7 +36,7 @@ class _TextInputComponentState extends State<TextInputComponent> {
       initialValue: widget.initialValue,
       onChanged: widget.onChanged ?? (String? t){},
       name: widget.fieldName,
-      decoration: widget.decoration != null ? widget.decoration?.copyWith(labelText: widget.label) as InputDecoration : kTextInputDecoration.copyWith(labelText: widget.label),
+      decoration: widget.decoration != null ? widget.decoration?.copyWith(labelText: widget.label) as InputDecoration : kTextInputDecoration.copyWith(labelText: widget.label).copyWith(  floatingLabelStyle: _textInputFieldKey.currentState?.errorText !=null ?  const TextStyle(color:Colors.red):kTextInputFloatingLabelStyle ,),
       obscureText: widget.obscureText,
       validator: FormBuilderValidators.compose(widget.validators),
     );

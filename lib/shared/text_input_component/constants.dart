@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 const kTextInputFocusColor = Color(0xff3fba81);
 const kTextInputBorderSide = BorderSide(width: 2.0);
 InputDecoration kTextInputDecoration = InputDecoration(
-  floatingLabelStyle: kTextInputFloatingLabelStyle,
+ // floatingLabelStyle: kTextInputFloatingLabelStyle,
     focusedBorder: kFocusedTextInputOutlineInputBorder,
   border: kTextInputOutlineInputBorder
 );
