@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -6,6 +5,9 @@ import 'package:modee_emrc_app/shared/text_input_component/emrc_text_input_compo
 import 'package:modee_emrc_app/shared/upload_component/emrc_upload_component.dart';
 import 'package:modee_emrc_app/shared/dropdown/dropdown_input_component.dart';
 import './electricity-controller.dart';
+import 'package:modee_emrc_app/services/electricity-service/electricity-provider.dart';
+import 'package:modee_emrc_app/shared/providers/emrc-provider.dart';
+import 'package:provider/provider.dart';
 class ElectricityEMRCService extends StatefulWidget {
   const ElectricityEMRCService({super.key});
 
@@ -20,6 +22,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
   void onChanged(dynamic val) => debugPrint(val.toString());
   @override
   Widget build(BuildContext context) {
+    EMRCProvider emrcProvider = Provider.of<ElectricityEMRCProvider>(context);
     return FutureBuilder(
       future: ElectricityEMRCController(context: context).initModule(),
       builder: (BuildContext context,AsyncSnapshot<String> snapshot){
@@ -60,15 +63,15 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                         ),
                                                                                                                                                                             ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
+                          child: UploadComponent (documentAccessor: emrcProvider,fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
                         )),
                                                                                                                                                     ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (fieldName:'passport',label:'passport',validators:[FormBuilderValidators.required()]),
+                          child: UploadComponent (documentAccessor: emrcProvider,fieldName:'passport',label:'passport',validators:[FormBuilderValidators.required()]),
                         )),
                                                                                                                                                     ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (fieldName:'idDocument',label:'idDocument',validators:[FormBuilderValidators.required()]),
+                          child: UploadComponent (documentAccessor: emrcProvider,fieldName:'idDocument',label:'idDocument',validators:[FormBuilderValidators.required()]),
                         )),
                                                                                                                            ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
