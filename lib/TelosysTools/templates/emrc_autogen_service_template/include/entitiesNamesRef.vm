@@ -1,1 +1,3 @@
 #set ( $formClassCompName = $entity.name + "EMRCService" )
+#set ( $formControllerName = $entity.name + "EMRCController")
+#set ( $formProviderName = $entity.name + "EMRCProvider")

@@ -10,8 +10,6 @@ import 'package:modee_emrc_app/shared/doc_viewer/stub_doc_viewer.dart'
 if(dart.library.io) 'package:modee_emrc_app/shared/doc_viewer/android_doc_viewer.dart'
 if(dart.library.html) 'package:modee_emrc_app/shared/doc_viewer/web_doc_viewer.dart';
 import 'package:provider/provider.dart';
-
-import '../../services/electricity-service/electricity-service-provider.dart';
 class UploadComponent extends StatelessWidget {
    final String label;
    final InputDecoration decoration;
@@ -25,59 +23,60 @@ class UploadComponent extends StatelessWidget {
       name: fieldName,
       validator: FormBuilderValidators.compose(validators),
       builder: (FormFieldState<dynamic> field){
-        return Consumer<ElectricityServiceProvider>(
-          builder: (context,serviceProvider,child){
-            return InputDecorator(
-                decoration: decoration.copyWith(labelText: label,errorText: field.errorText),
-                child: GestureDetector(
-                  onTap: ()async{
-                    FilePickerResult? result = await PlatformUtilityService().pickFile();
-                    if (result != null) {
-                      serviceProvider.setDocument(fieldName, result.files.first);
-                      field.didChange(result.files.first.name);
-                    } else {
-                      // User canceled the picker
-                    }
-                  },
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row (children: [
-                            const Icon(Icons.attach_file),
-                            if(serviceProvider.getDocument(fieldName)!=null)  Expanded (
-                              child: GestureDetector(
-                                onTap:(){
-                                  DocViewer().openFile(serviceProvider.getDocument(fieldName) as PlatformFile);
-                                },
-                                child: Padding (
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(serviceProvider.getDocument(fieldName)!=null ? serviceProvider.getDocument(fieldName)?.name as String: ""),
-                                ),
-                              ),
-                            )
-                          ]),
-                        ),
-                        if(serviceProvider.getDocument(fieldName)!=null) Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(onTap:(){
-                           serviceProvider.setDocument(fieldName,null);
-                           field.didChange(null);
-                          },child: const Icon(Icons.delete)),
-                        ),
-                        if(serviceProvider.getDocument(fieldName)!=null) Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(onTap:()async{
-                            await   PlatformUtilityService().downloadFile(serviceProvider.getDocument(fieldName) as PlatformFile);
-                            DocViewer().openFile(serviceProvider.getDocument(fieldName) as PlatformFile);
-                          },child: const Icon(Icons.download)),
-                        )
-                      ]
-                  ),
-                )
-            );
-          }
-        );
+        return Container();
+        //   Consumer<ElectricityServiceProvider>(
+        //   builder: (context,serviceProvider,child){
+        //     return InputDecorator(
+        //         decoration: decoration.copyWith(labelText: label,errorText: field.errorText),
+        //         child: GestureDetector(
+        //           onTap: ()async{
+        //             FilePickerResult? result = await PlatformUtilityService().pickFile();
+        //             if (result != null) {
+        //               serviceProvider.setDocument(fieldName, result.files.first);
+        //               field.didChange(result.files.first.name);
+        //             } else {
+        //               // User canceled the picker
+        //             }
+        //           },
+        //           child: Row(
+        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //               children: [
+        //                 Expanded(
+        //                   child: Row (children: [
+        //                     const Icon(Icons.attach_file),
+        //                     if(serviceProvider.getDocument(fieldName)!=null)  Expanded (
+        //                       child: GestureDetector(
+        //                         onTap:(){
+        //                           DocViewer().openFile(serviceProvider.getDocument(fieldName) as PlatformFile);
+        //                         },
+        //                         child: Padding (
+        //                           padding: const EdgeInsets.all(8.0),
+        //                           child: Text(serviceProvider.getDocument(fieldName)!=null ? serviceProvider.getDocument(fieldName)?.name as String: ""),
+        //                         ),
+        //                       ),
+        //                     )
+        //                   ]),
+        //                 ),
+        //                 if(serviceProvider.getDocument(fieldName)!=null) Padding(
+        //                   padding: const EdgeInsets.all(8.0),
+        //                   child: GestureDetector(onTap:(){
+        //                    serviceProvider.setDocument(fieldName,null);
+        //                    field.didChange(null);
+        //                   },child: const Icon(Icons.delete)),
+        //                 ),
+        //                 if(serviceProvider.getDocument(fieldName)!=null) Padding(
+        //                   padding: const EdgeInsets.all(8.0),
+        //                   child: GestureDetector(onTap:()async{
+        //                     await   PlatformUtilityService().downloadFile(serviceProvider.getDocument(fieldName) as PlatformFile);
+        //                     DocViewer().openFile(serviceProvider.getDocument(fieldName) as PlatformFile);
+        //                   },child: const Icon(Icons.download)),
+        //                 )
+        //               ]
+        //           ),
+        //         )
+        //     );
+        //   }
+        // );
       }
     );
   }

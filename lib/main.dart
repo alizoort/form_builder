@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:modee_emrc_app/services/electricity-service/electricity-provider.dart';
 import 'package:modee_emrc_app/shared/configurations/environment.dart';
-import 'package:modee_emrc_app/services/electricity-service/electricity-service-provider.dart';
 import 'package:provider/provider.dart';
 
 import 'boot_comp.dart';
@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers:[ChangeNotifierProvider(create: (context)=>ElectricityServiceProvider())],
+      providers:[
+        ChangeNotifierProvider(create: (context)=>ElectricityEMRCProvider())
+        ],
       child: BootComp()
     );
   }
