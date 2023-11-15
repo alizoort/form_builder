@@ -6,15 +6,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modee_emrc_app/shared/services/emrc-service.dart';
 import 'package:provider/provider.dart';
-import './mineralExtractionLicenseRenewal-provider.dart';
+import './minerals-provider.dart';
 import '../../shared/controllers/app-controller.dart';
 
-class MineralExtractionLicenseRenewalEMRCController extends AppController {
+class MineralsEMRCController extends AppController {
   BuildContext context;
-  late MineralExtractionLicenseRenewalEMRCProvider serviceProvider;
-  MineralExtractionLicenseRenewalEMRCController({required this.context}){
+  late MineralsEMRCProvider serviceProvider;
+  MineralsEMRCController({required this.context}){
      // Initialize you providers .....
-    serviceProvider = Provider.of<MineralExtractionLicenseRenewalEMRCProvider>(context,listen:false);
+    serviceProvider = Provider.of<MineralsEMRCProvider>(context,listen:false);
   }
   @override
   Future<String> initModule() async {

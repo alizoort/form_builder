@@ -1,0 +1,7 @@
+// Entity Minerals
+@DbTable(Minerals)
+Minerals {
+      FirstName : string { #TextInput };
+      LastName : string { #TextInput };
+      document : string { #UploadInput };
+}

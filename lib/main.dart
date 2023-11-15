@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:modee_emrc_app/services/electricity-service/electricity-provider.dart';
-import 'package:modee_emrc_app/services/mineralextractionlicenserenewal-service/mineralextractionlicenserenewal-provider.dart';
+import 'package:modee_emrc_app/services/minerals-service/minerals-provider.dart';
 import 'package:modee_emrc_app/shared/configurations/environment.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers:[
-        ChangeNotifierProvider(create: (context)=>ElectricityEMRCProvider()),
-        ChangeNotifierProvider(create: (context)=>MineralExtractionLicenseRenewalEMRCProvider())
+        ChangeNotifierProvider( create : (context)=> MineralsEMRCProvider())
         ],
-      child: BootComp()
+      child: const BootComp()
     );
   }
 }

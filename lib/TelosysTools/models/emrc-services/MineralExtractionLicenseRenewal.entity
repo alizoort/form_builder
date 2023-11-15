@@ -1,7 +1,0 @@
-// Entity MineralExtractionLicenseRenewal
-@DbTable(MineralExtractionLicenseRenewal)
-MineralExtractionLicenseRenewal {
-    email : string { #TextInput };
-      description : string { #TextInput };
-      gender: string { #DropdownInput};
-}
