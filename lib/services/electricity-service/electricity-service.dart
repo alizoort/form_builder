@@ -57,7 +57,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                             child: TextInputComponent(fieldName: 'firstName', label: 'firstName',validators: [
                             ]),
                           ),
-                          FormArrayComponent(fieldName: "formArray",  label: "Form Array",dynamicFields:[Padding(
+                          FormArrayComponent(fieldName: "formArrayNested",  label: "Form Array",dynamicFields:[Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextInputComponent(fieldName: 'lastName', label: 'lastName',validators: [
                               FormBuilderValidators.required()
@@ -75,6 +75,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
             ),
         ElevatedButton(
             onPressed: () {
+             print("VALUE ${ _formKey.currentState?.fields['formArray']?.value}");
             //  _formKey.currentState?.save();
            //   _formKey.currentState?.validate();
             },
