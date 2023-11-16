@@ -63,7 +63,7 @@ class _MineralsEMRCServiceState extends State<MineralsEMRCService> {
                         ),
                                                                                                                                                                             ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (documentAccessor: emrcProvider,fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
+                          child: UploadComponent (fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
                         )),
                                                                                               ]
                   );

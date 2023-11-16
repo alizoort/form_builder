@@ -31,14 +31,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
         children: [
         FormBuilder(
               key: _formKey,
-              onChanged: (){
-                _formKey.currentState?.save();
-                _formKey.currentState?.validate();
-              },
-              autovalidateMode: AutovalidateMode.always,
-              initialValue: const {
-
-              },
+              autovalidateMode: AutovalidateMode.disabled,
               skipDisabled: true,
               child: LayoutBuilder(
                 builder: (BuildContext context,BoxConstraints constraints){
@@ -46,7 +39,11 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                   final maxChildWidth = availableWidth <400 ?availableWidth : availableWidth / 2;
                   return Wrap(
                       children:  <Widget>[
-                        FormArrayComponent(fieldName: "formArray",  label: "Form Array",dynamicFields:[Padding(
+                        FormArrayComponent(fieldName: "formArray",  label: "Form Array",dynamicFields:[
+                          ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: UploadComponent (fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
+                          )),Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextInputComponent(fieldName: 'lastName', label: 'lastName',validators: [
                             FormBuilderValidators.required()
@@ -75,9 +72,10 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
             ),
         ElevatedButton(
             onPressed: () {
+               _formKey.currentState?.save();
+                _formKey.currentState?.validate();
              print("VALUE ${ _formKey.currentState?.fields['formArray']?.value}");
-            //  _formKey.currentState?.save();
-           //   _formKey.currentState?.validate();
+
             },
             child: const Text("Submit")
         )

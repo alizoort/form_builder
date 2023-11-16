@@ -12,28 +12,38 @@ if(dart.library.io) 'package:modee_emrc_app/shared/doc_viewer/android_doc_viewer
 if(dart.library.html) 'package:modee_emrc_app/shared/doc_viewer/web_doc_viewer.dart';
 
 
-class UploadComponent extends StatelessWidget {
+class UploadComponent extends StatefulWidget {
    final String label;
    final InputDecoration decoration;
    final String fieldName;
-   final List<String? Function(String?)> validators;
-   final DocumentAccessor documentAccessor;
-   const UploadComponent({super.key,required this.documentAccessor,required this.fieldName,required this.label,this.decoration = kUploadInputDecoration,this.validators=const []});
+   final List<String? Function(PlatformFile?)> validators;
+   const UploadComponent({super.key,required this.fieldName,required this.label,this.decoration = kUploadInputDecoration,this.validators=const []});
 
   @override
+  State<UploadComponent> createState() => _UploadComponentState();
+}
+
+class _UploadComponentState extends State<UploadComponent> {
+  PlatformFile? uploadFile;
+  setUploadFile(FormFieldState<dynamic> field,PlatformFile? file){
+    setState((){
+      uploadFile =file;
+      field.didChange(uploadFile);
+    });
+  }
+  @override
   Widget build(BuildContext context) {
-    return FormBuilderField(
-      name: fieldName,
-      validator: FormBuilderValidators.compose(validators),
+    return FormBuilderField<PlatformFile?>(
+      name: widget.fieldName,
+      validator: FormBuilderValidators.compose(widget.validators),
       builder: (FormFieldState<dynamic> field){
         return InputDecorator(
-            decoration: decoration.copyWith(labelText: label,errorText: field.errorText),
+            decoration: widget.decoration.copyWith(labelText: widget.label,errorText: field.errorText),
             child: GestureDetector(
               onTap: ()async{
                 FilePickerResult? result = await PlatformUtilityService().pickFile();
                 if (result != null) {
-                  documentAccessor.setDocument(fieldName, result.files.first);
-                  field.didChange(result.files.first.name);
+                  setUploadFile(field, result.files.first);
                 } else {
                   // User canceled the picker
                 }
@@ -44,31 +54,30 @@ class UploadComponent extends StatelessWidget {
                     Expanded(
                       child: Row (children: [
                         const Icon(Icons.attach_file),
-                        if(documentAccessor.getDocument(fieldName)!=null)  Expanded (
+                        if(uploadFile!=null)  Expanded (
                           child: GestureDetector(
                             onTap:(){
-                              DocViewer().openFile(documentAccessor.getDocument(fieldName) as PlatformFile);
+                              DocViewer().openFile(uploadFile as PlatformFile);
                             },
                             child: Padding (
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(documentAccessor.getDocument(fieldName)!=null ? documentAccessor.getDocument(fieldName)?.name as String: ""),
+                              child: Text(uploadFile!=null ? uploadFile?.name as String: ""),
                             ),
                           ),
                         )
                       ]),
                     ),
-                    if(documentAccessor.getDocument(fieldName)!=null) Padding(
+                    if(uploadFile!=null) Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(onTap:(){
-                        documentAccessor.setDocument(fieldName,null);
-                        field.didChange(null);
+                       setUploadFile(field,null);
                       },child: const Icon(Icons.delete)),
                     ),
-                    if(documentAccessor.getDocument(fieldName)!=null) Padding(
+                    if(uploadFile!=null) Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(onTap:()async{
-                        await   PlatformUtilityService().downloadFile(documentAccessor.getDocument(fieldName) as PlatformFile);
-                        DocViewer().openFile(documentAccessor.getDocument(fieldName) as PlatformFile);
+                        await   PlatformUtilityService().downloadFile(uploadFile as PlatformFile);
+                        DocViewer().openFile(uploadFile as PlatformFile);
                       },child: const Icon(Icons.download)),
                     )
                   ]

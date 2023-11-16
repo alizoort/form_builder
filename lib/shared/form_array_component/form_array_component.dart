@@ -66,12 +66,10 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
                GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
                setState((){
                  formRecords.add(FormBuilder(
-                   autovalidateMode: AutovalidateMode.always,
+                   autovalidateMode: AutovalidateMode.disabled,
                    onChanged: (){
-                     formKey.currentState?.save();
-                     formKey.currentState?.validate();
                      formFieldKey.currentState?.save();
-                     formFieldKey.currentState?.validate();
+                 //    formFieldKey.currentState?.validate();
                      setFormBuilderFieldValue(field);
                    },
                    key: formKey,
