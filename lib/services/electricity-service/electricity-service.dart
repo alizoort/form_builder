@@ -33,9 +33,9 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
               key: _formKey,
               onChanged: (){
                 _formKey.currentState?.save();
-              //  debugPrint(_formKey.currentState?.value.toString());
+                _formKey.currentState?.validate();
               },
-              autovalidateMode: AutovalidateMode.disabled,
+              autovalidateMode: AutovalidateMode.always,
               initialValue: const {
 
               },
@@ -47,23 +47,23 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                   return Wrap(
                       children:  <Widget>[
                         FormArrayComponent(fieldName: "formArray",  label: "Form Array",dynamicFields:[Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextInputComponent(fieldName: 'lastName', label: 'lastName',validators: [
                             FormBuilderValidators.required()
                           ]),
                         ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextInputComponent(fieldName: 'firstName', label: 'firstName',validators: [
                             ]),
                           ),
                           FormArrayComponent(fieldName: "formArray",  label: "Form Array",dynamicFields:[Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: TextInputComponent(fieldName: 'lastName', label: 'lastName',validators: [
                               FormBuilderValidators.required()
                             ]),
                           ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: TextInputComponent(fieldName: 'firstName', label: 'firstName',validators: [
                               ]),
@@ -75,7 +75,8 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
             ),
         ElevatedButton(
             onPressed: () {
-              _formKey.currentState?.validate();
+            //  _formKey.currentState?.save();
+           //   _formKey.currentState?.validate();
             },
             child: const Text("Submit")
         )

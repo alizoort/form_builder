@@ -16,6 +16,7 @@ class FormArrayComponent extends StatefulWidget {
 }
 
 class _FormArrayComponentState extends State<FormArrayComponent> {
+  GlobalKey<FormBuilderFieldState> formFieldKey = GlobalKey<FormBuilderFieldState>();
   List<FormBuilder> formRecords =[];
   setFormBuilderFieldValue(FormFieldState<dynamic> field){
     if(formRecords.isEmpty){
@@ -25,9 +26,20 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
       field.didChange(formRecords.length.toString());
     }
   }
+  save(){
+    for (FormBuilder formBuilder in formRecords) {
+      if((formBuilder.key as GlobalKey<FormBuilderState>).currentState!=null){
+        ((formBuilder.key as GlobalKey<FormBuilderState>).currentState as FormBuilderState).save();
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
    return FormBuilderField(
+     key:formFieldKey,
+     onSaved: (String? val){
+       save();
+     },
      decoration:widget.decoration,
      name: widget.fieldName,
      validator: FormBuilderValidators.compose([...widget.validators,(String? val){
@@ -44,15 +56,22 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
          child:Column(
            children:  [
              GestureDetector(onTap:(){
+               GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
                setState((){
                  formRecords.add(FormBuilder(
                    autovalidateMode: AutovalidateMode.always,
-                   key: GlobalKey<FormBuilderState>(),
+                   onChanged: (){
+                     formKey.currentState?.save();
+                     formKey.currentState?.validate();
+                     formFieldKey.currentState?.save();
+                     formFieldKey.currentState?.validate();
+                   },
+                   key: formKey,
                    child: Column(
-                     children: [
-                       ...widget.dynamicFields
-                     ]
-                    ),
+                       children: [
+                         ...widget.dynamicFields
+                       ]
+                   ),
                  ));
                  setFormBuilderFieldValue(field);
                });
