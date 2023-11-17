@@ -19,10 +19,10 @@ class MineralsEMRCController extends AppController {
   @override
   Future<String> initModule() async {
          Map<String,dynamic> map = {};
-         for(String docKey in serviceProvider.getDocuments().keys){
-
-           map["delegacyDocumentStream"]=MultipartFile.fromBytes((serviceProvider.getDocument(docKey) as PlatformFile).bytes as Uint8List,filename:(serviceProvider.getDocument(docKey) as PlatformFile).name );
-         }
+         // for(String docKey in serviceProvider.getDocuments().keys){
+         //
+         //   map["delegacyDocumentStream"]=MultipartFile.fromBytes((serviceProvider.getDocument(docKey) as PlatformFile).bytes as Uint8List,filename:(serviceProvider.getDocument(docKey) as PlatformFile).name );
+         // }
          return "";
   }
 

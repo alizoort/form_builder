@@ -25,7 +25,7 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
     else {
       Map<String,dynamic> map ={};
       formRecords.asMap().forEach((int index,FormBuilder formBuilder){
-        FormBuilderState? state = (formBuilder.key as GlobalKey<FormBuilderState>).currentState;
+        FormBuilderState? state = getFormKey(formBuilder).currentState;
         if(state!=null){
           map["form_$index"]= state.value;
         }
@@ -35,17 +35,20 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
   }
   save(){
     for (FormBuilder formBuilder in formRecords) {
-      if((formBuilder.key as GlobalKey<FormBuilderState>).currentState!=null){
-        ((formBuilder.key as GlobalKey<FormBuilderState>).currentState as FormBuilderState).save();
+      if(getFormKey(formBuilder).currentState!=null){
+        (getFormKey(formBuilder).currentState as FormBuilderState).save();
       }
     }
+  }
+  GlobalKey<FormBuilderState> getFormKey(FormBuilder formBuilder){
+    return formBuilder.key as GlobalKey<FormBuilderState>;
   }
   @override
   Widget build(BuildContext context) {
    return FormBuilderField<Map<String,dynamic>?>(
      key:formFieldKey,
      onSaved: (Map<String,dynamic>? val){
-       save();
+         save();
      },
      decoration:widget.decoration,
      name: widget.fieldName,
@@ -66,10 +69,10 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
                GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
                setState((){
                  formRecords.add(FormBuilder(
-                   autovalidateMode: AutovalidateMode.disabled,
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
                    onChanged: (){
                      formFieldKey.currentState?.save();
-                 //    formFieldKey.currentState?.validate();
+                     formFieldKey.currentState?.validate();
                      setFormBuilderFieldValue(field);
                    },
                    key: formKey,

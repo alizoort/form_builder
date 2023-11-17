@@ -2,7 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:modee_emrc_app/shared/mixins/document-accessor.dart';
 import 'package:modee_emrc_app/shared/upload_component/constants.dart';
 import 'package:modee_emrc_app/shared/utility_service/stub_platform_utility_service.dart'
 if (dart.library.io) 'package:modee_emrc_app/shared/utility_service/android_platform_utility_service.dart'

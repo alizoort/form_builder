@@ -31,7 +31,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
         children: [
         FormBuilder(
               key: _formKey,
-              autovalidateMode: AutovalidateMode.disabled,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               skipDisabled: true,
               child: LayoutBuilder(
                 builder: (BuildContext context,BoxConstraints constraints){
@@ -40,10 +40,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                   return Wrap(
                       children:  <Widget>[
                         FormArrayComponent(fieldName: "formArray",  label: "Form Array",dynamicFields:[
-                          ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: UploadComponent (fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
-                          )),Padding(
+                        Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextInputComponent(fieldName: 'lastName', label: 'lastName',validators: [
                             FormBuilderValidators.required()
@@ -73,6 +70,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
         ElevatedButton(
             onPressed: () {
                _formKey.currentState?.save();
+               print(_formKey.currentState?.isValid);
                 _formKey.currentState?.validate();
              print("VALUE ${ _formKey.currentState?.fields['formArray']?.value}");
 
