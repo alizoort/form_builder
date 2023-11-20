@@ -9,6 +9,7 @@ import './electricity-controller.dart';
 import 'package:modee_emrc_app/services/electricity-service/electricity-provider.dart';
 import '../../shared/mixins/document-accessor.dart';
 import 'package:modee_emrc_app/shared/check-box/check-box.dart';
+import '../models/lookup.dart';
 import 'package:modee_emrc_app/shared/date-picker/date-picker.dart';
 import 'package:provider/provider.dart';
 class ElectricityEMRCService extends StatefulWidget {
@@ -149,12 +150,19 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                         ),
                                                                                                                                                                                                                                                                                              ConstrainedBox(
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
-                               child: const Padding(
-                               padding: EdgeInsets.all(8.0),
-                               child: DropdownInputComponent<String>(labelText:'companyTypeId',items: [],name: 'companyTypeId',),
+                               child:  Padding(
+                               padding: const EdgeInsets.all(8.0),
+                               child: DropdownInputComponent<Lookup>(key:UniqueKey(),labelText:'companyTypeId',items: [Lookup(id:1,code: "LEB",description:"lebanon"),
+                                 Lookup(id:2,code: "UK",description:"united kingdom")],name: 'companyTypeId',),
                             ),
                          ),
-                                                                      ]
+                                                                                                                            ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: UploadComponent (onChanged: (PlatformFile? file){
+                            onChanged(file,file.hashCode.toString(),emrcProvider);
+                          },fieldName:'delegacyDocumentStream',label:'delegacyDocumentStream',validators:[FormBuilderValidators.required()]),
+                        )),
+                                                                                                                                          ]
                   );
                 }
               )

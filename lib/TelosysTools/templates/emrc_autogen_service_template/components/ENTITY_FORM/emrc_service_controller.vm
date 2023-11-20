@@ -27,6 +27,7 @@ class $formControllerName extends AppController {
       if(formKey.currentState!=null){
          formKey.currentState?.save();
          formKey.currentState?.validate();
+         print("VALUE ${formKey.currentState?.value}");
          if((formKey.currentState as FormBuilderState).isValid){
           
          }

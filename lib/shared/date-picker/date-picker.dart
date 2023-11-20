@@ -38,7 +38,7 @@ class _DatePickerComponentState extends State<DatePickerComponent> {
           },
         ),
       ),
-      initialTime: widget.timeOfDay ?? const TimeOfDay(hour: 8, minute: 0),
+   //   initialTime: widget.timeOfDay ?? const TimeOfDay(hour: 8, minute: 0),
       // locale: const Locale.fromSubtags(languageCode: 'fr'),
     );
   }

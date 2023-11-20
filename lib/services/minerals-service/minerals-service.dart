@@ -9,6 +9,7 @@ import './minerals-controller.dart';
 import 'package:modee_emrc_app/services/minerals-service/minerals-provider.dart';
 import '../../shared/mixins/document-accessor.dart';
 import 'package:modee_emrc_app/shared/check-box/check-box.dart';
+import '../models/lookup.dart';
 import 'package:modee_emrc_app/shared/date-picker/date-picker.dart';
 import 'package:provider/provider.dart';
 class MineralsEMRCService extends StatefulWidget {

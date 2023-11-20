@@ -3,7 +3,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:modee_emrc_app/shared/dropdown/constants.dart';
 
-class DropdownInputComponent<T> extends StatefulWidget {
+import '../../services/models/lookup.dart';
+
+class DropdownInputComponent<T extends Lookup> extends StatefulWidget {
   final String name;
   final String labelText;
   final List<T> items;
@@ -18,10 +20,12 @@ class DropdownInputComponent<T> extends StatefulWidget {
   State<DropdownInputComponent<T>> createState() => _DropdownInputComponentState<T>();
 }
 
-class _DropdownInputComponentState<T> extends State<DropdownInputComponent<T>> {
+class _DropdownInputComponentState<T extends Lookup> extends State<DropdownInputComponent<T>> {
   final GlobalKey<FormBuilderFieldState> _dropdownFieldKey = GlobalKey<FormBuilderFieldState>();
+
   @override
   Widget build(BuildContext context)  {
+    print("WIDGET ${widget.items.map((item)=>item.id).toList()}");
     return FormBuilderDropdown<T>(
       onChanged: widget.onChanged,
       validator: FormBuilderValidators.compose(widget.validator),
@@ -39,11 +43,14 @@ class _DropdownInputComponentState<T> extends State<DropdownInputComponent<T>> {
         },
       ))
       ),
-      items: widget.items.map((item) => DropdownMenuItem(
-        alignment: AlignmentDirectional.center,
-        value: item,
-        child: Text(item.toString()),
-      ))
+      items: widget.items.map((item){
+        print("Item ${item.id}");
+        return  DropdownMenuItem(
+          alignment: AlignmentDirectional.center,
+          value: item,
+          child: Text(item.code),
+        );
+      })
           .toList()
     );
   }

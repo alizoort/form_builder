@@ -10,6 +10,7 @@ import './$fn.uncapitalize($entity.name)-controller.dart';
 import 'package:modee_emrc_app/services/$fn.uncapitalize($entity.name)-service/$fn.uncapitalize($entity.name)-provider.dart';
 import '../../shared/mixins/document-accessor.dart';
 import 'package:modee_emrc_app/shared/check-box/check-box.dart';
+import '../models/lookup.dart';
 import 'package:modee_emrc_app/shared/date-picker/date-picker.dart';
 import 'package:provider/provider.dart';
 class $formClassCompName extends StatefulWidget {
@@ -88,7 +89,7 @@ class _${formClassCompName}State extends State<$formClassCompName> {
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
                                child: const Padding(
                                padding: EdgeInsets.all(8.0),
-                               child: DropdownInputComponent<String>(labelText:'$fn.uncapitalize($attribute.name)',items: [],name: '$fn.uncapitalize($attribute.name)',),
+                               child: DropdownInputComponent<Lookup>(labelText:'$fn.uncapitalize($attribute.name)',items: [],name: '$fn.uncapitalize($attribute.name)',),
                             ),
                          ),
                         #end

@@ -15,4 +15,5 @@ Electricity {
   representativeResidentId: string { #TextInput};
   representativeMobileNumber: string { #TextInput};
   companyTypeId: string { #DropdownInput};
+  delegacyDocumentStream : string { #UploadInput};
 }
