@@ -14,9 +14,10 @@ class TextInputComponent extends StatefulWidget {
   final bool readOnly;
   final AutovalidateMode? autovalidateMode;
   final int maxLines;
+  final TextInputType? textInputType;
   final dynamic Function(String?)? valueTransformer;
   const TextInputComponent({super.key,required this.fieldName,required this.label,this.validators= const[],this.obscureText=false,
-  this.readOnly=false,this.autovalidateMode=AutovalidateMode.disabled,this.maxLines =1,this.decoration ,this.onChanged,this.initialValue,this.valueTransformer});
+  this.readOnly=false,this.autovalidateMode=AutovalidateMode.disabled,this.maxLines =1,this.decoration ,this.onChanged,this.initialValue,this.valueTransformer,this.textInputType});
 
   @override
   State<TextInputComponent> createState() => _TextInputComponentState();
@@ -29,6 +30,7 @@ class _TextInputComponentState extends State<TextInputComponent> {
     return  FormBuilderTextField(
       key:_textInputFieldKey,
       cursorColor:kTextInputFocusColor,
+      keyboardType: widget.textInputType,
       valueTransformer: widget.valueTransformer,
       maxLines: widget.maxLines,
       autovalidateMode: widget.autovalidateMode,

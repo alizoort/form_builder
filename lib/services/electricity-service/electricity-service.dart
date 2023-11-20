@@ -8,6 +8,7 @@ import 'package:modee_emrc_app/shared/dropdown/dropdown_input_component.dart';
 import './electricity-controller.dart';
 import 'package:modee_emrc_app/services/electricity-service/electricity-provider.dart';
 import '../../shared/mixins/document-accessor.dart';
+import 'package:modee_emrc_app/shared/check-box/check-box.dart';
 import 'package:modee_emrc_app/shared/date-picker/date-picker.dart';
 import 'package:provider/provider.dart';
 class ElectricityEMRCService extends StatefulWidget {
@@ -54,72 +55,106 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextInputComponent(fieldName: 'firstName', label: 'firstName',validators: [  FormBuilderValidators.required(),
+                            child: TextInputComponent(fieldName: 'nameAr', label: 'nameAr',validators: [  FormBuilderValidators.required(),
                              ]),
                           ),
                         ),
-                                                                                                                                                                          ConstrainedBox(
+                                                                                                                                                                                               ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextInputComponent(fieldName: 'lastName', label: 'lastName',validators: [  FormBuilderValidators.required(),
+                            child: TextInputComponent(fieldName: 'nameEn', label: 'nameEn',validators: [  FormBuilderValidators.required(),
                              ]),
                           ),
                         ),
-                                                                                                                                                                                                   ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (onChanged: (PlatformFile? file){
-                            onChanged(file,file.hashCode.toString(),emrcProvider);
-                          },fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
-                        )),
-                                                                                                                                                                           ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (onChanged: (PlatformFile? file){
-                            onChanged(file,file.hashCode.toString(),emrcProvider);
-                          },fieldName:'passport',label:'passport',validators:[FormBuilderValidators.required()]),
-                        )),
-                                                                                                                                                                           ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (onChanged: (PlatformFile? file){
-                            onChanged(file,file.hashCode.toString(),emrcProvider);
-                          },fieldName:'idDocument',label:'idDocument',validators:[FormBuilderValidators.required()]),
-                        )),
-                                                                                                                                                  ConstrainedBox(
+                                                                                                                                                                                               ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextInputComponent(fieldName: 'phoneNumber', label: 'phoneNumber',validators: [  FormBuilderValidators.required(),
+                            child: TextInputComponent(fieldName: 'companyNationalIdNumber', label: 'companyNationalIdNumber',validators: [  FormBuilderValidators.required(),
                              ]),
                           ),
                         ),
-                                                                                                                                                                          ConstrainedBox(
+                                                                                                                                                                                               ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextInputComponent(fieldName: 'email', label: 'email',validators: [  FormBuilderValidators.required(),
+                            child: TextInputComponent(fieldName: 'taxNumber', label: 'taxNumber',validators: [  FormBuilderValidators.required(),
                              ]),
                           ),
                         ),
-                                                                                                                                                                          ConstrainedBox(
+                                                                                                                                                                                               ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextInputComponent(fieldName: 'description', label: 'description',validators: [  FormBuilderValidators.required(),
+                            child: TextInputComponent(fieldName: 'registrationNumber', label: 'registrationNumber',validators: [  FormBuilderValidators.required(),
                              ]),
                           ),
                         ),
-                                                                                                                                                                                                                                                   ConstrainedBox(
+                                                                                                                                                                                                                                            ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                     child: DatePickerComponent(fieldName: 'registrationDate', label: 'registrationDate'),
+                      )),
+                                                                                                                                              ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'companyPhoneNumber', label: 'companyPhoneNumber',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                                                                                               ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'representativeType', label: 'representativeType',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                                                                                               ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'representativeName', label: 'representativeName',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                                                                                                                                                                 ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                     child: CheckBoxComponent(label: 'representativeIsJordanian', fieldName: 'representativeIsJordanian'),
+                      )),
+                                                                                                                         ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'representativeNationalId', label: 'representativeNationalId',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                                                                                               ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'representativeResidentId', label: 'representativeResidentId',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                                                                                               ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: maxChildWidth),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextInputComponent(fieldName: 'representativeMobileNumber', label: 'representativeMobileNumber',validators: [  FormBuilderValidators.required(),
+                             ]),
+                          ),
+                        ),
+                                                                                                                                                                                                                                                                                             ConstrainedBox(
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
                                child: const Padding(
                                padding: EdgeInsets.all(8.0),
-                               child: DropdownInputComponent<String>(labelText:'gender',items: ["Male","Female"],name: 'gender',),
+                               child: DropdownInputComponent<String>(labelText:'companyTypeId',items: [],name: 'companyTypeId',),
                             ),
                          ),
-                                                                                                                                                ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                     child: DatePickerComponent(fieldName: 'dateOfBirth', label: 'dateOfBirth'),
-                      )),
-                                                                                            ]
+                                                                      ]
                   );
                 }
               )

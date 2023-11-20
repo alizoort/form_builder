@@ -1,14 +1,18 @@
 // Entity Electricity
 @DbTable(Electricity)
 Electricity {
-    FirstName : string { #TextInput };
-    LastName : string { #TextInput };
-    document : string { #UploadInput };
-    passport : string { #UploadInput };
-    idDocument : string { #UploadInput };
-    phoneNumber : string { #TextInput };
-    email : string { #TextInput };
-    description : string { #TextInput };
-    gender: string { #DropdownInput};
-    dateOfBirth : string { #DateInput };
+  nameAr: string {#TextInput};
+  nameEn : string { #TextInput};
+  companyNationalIdNumber: string { #TextInput};
+  taxNumber: string { #TextInput};
+  registrationNumber: string  { #TextInput};
+  registrationDate: string  { #DateInput};
+  companyPhoneNumber: string { #TextInput};
+  representativeType: string { #TextInput};
+  representativeName: string { #TextInput};
+  representativeIsJordanian: string { #CheckBoxInput};
+  representativeNationalId: string { #TextInput};
+  representativeResidentId: string { #TextInput};
+  representativeMobileNumber: string { #TextInput};
+  companyTypeId: string { #DropdownInput};
 }
