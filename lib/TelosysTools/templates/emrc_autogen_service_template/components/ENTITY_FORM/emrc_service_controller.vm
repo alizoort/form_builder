@@ -22,7 +22,8 @@ class $formControllerName extends AppController {
   Future<String> initModule() async {
          return "";
   }
-  onSubmit(){
+  @override
+  Future<void> onSubmit() async {
       if(formKey.currentState!=null){
          formKey.currentState?.save();
          formKey.currentState?.validate();
