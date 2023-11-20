@@ -4,4 +4,5 @@ Minerals {
       FirstName : string { #TextInput };
       LastName : string { #TextInput };
       document : string { #UploadInput };
+      dateOfBirth : string {#DateInput};
 }

@@ -8,6 +8,7 @@ import 'package:modee_emrc_app/shared/dropdown/dropdown_input_component.dart';
 import './minerals-controller.dart';
 import 'package:modee_emrc_app/services/minerals-service/minerals-provider.dart';
 import '../../shared/mixins/document-accessor.dart';
+import 'package:modee_emrc_app/shared/date-picker/date-picker.dart';
 import 'package:provider/provider.dart';
 class MineralsEMRCService extends StatefulWidget {
   const MineralsEMRCService({super.key});
@@ -57,7 +58,7 @@ class _MineralsEMRCServiceState extends State<MineralsEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                   ConstrainedBox(
+                                                                                                                                                                          ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -65,13 +66,17 @@ class _MineralsEMRCServiceState extends State<MineralsEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                                            ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                                                                                                                                                                                                   ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: UploadComponent (onChanged: (PlatformFile? file){
                             onChanged(file,file.hashCode.toString(),emrcProvider);
                           },fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
                         )),
-                                                                                              ]
+                                                                                                                                                                                               ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                     child: DatePickerComponent(fieldName: 'dateOfBirth', label: 'dateOfBirth'),
+                      )),
+                                                                                            ]
                   );
                 }
               )

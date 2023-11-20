@@ -10,4 +10,5 @@ Electricity {
     email : string { #TextInput };
     description : string { #TextInput };
     gender: string { #DropdownInput};
+    dateOfBirth : string { #DateInput };
 }

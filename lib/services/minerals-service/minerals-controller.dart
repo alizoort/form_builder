@@ -23,6 +23,7 @@ class MineralsEMRCController extends AppController {
   }
   @override
   Future<void> onSubmit() async {
+    print("VALUE ${(formKey.currentState as FormBuilderState)}");
       if(formKey.currentState!=null){
          formKey.currentState?.save();
          formKey.currentState?.validate();

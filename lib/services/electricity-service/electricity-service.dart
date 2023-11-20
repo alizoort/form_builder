@@ -8,6 +8,7 @@ import 'package:modee_emrc_app/shared/dropdown/dropdown_input_component.dart';
 import './electricity-controller.dart';
 import 'package:modee_emrc_app/services/electricity-service/electricity-provider.dart';
 import '../../shared/mixins/document-accessor.dart';
+import 'package:modee_emrc_app/shared/date-picker/date-picker.dart';
 import 'package:provider/provider.dart';
 class ElectricityEMRCService extends StatefulWidget {
   const ElectricityEMRCService({super.key});
@@ -57,7 +58,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                   ConstrainedBox(
+                                                                                                                                                                          ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -65,25 +66,25 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                                            ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                                                                                                                                                                                                   ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: UploadComponent (onChanged: (PlatformFile? file){
                             onChanged(file,file.hashCode.toString(),emrcProvider);
                           },fieldName:'document',label:'document',validators:[FormBuilderValidators.required()]),
                         )),
-                                                                                                                                                    ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                                                                                                                                                                           ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: UploadComponent (onChanged: (PlatformFile? file){
                             onChanged(file,file.hashCode.toString(),emrcProvider);
                           },fieldName:'passport',label:'passport',validators:[FormBuilderValidators.required()]),
                         )),
-                                                                                                                                                    ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                                                                                                                                                                           ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: UploadComponent (onChanged: (PlatformFile? file){
                             onChanged(file,file.hashCode.toString(),emrcProvider);
                           },fieldName:'idDocument',label:'idDocument',validators:[FormBuilderValidators.required()]),
                         )),
-                                                                                                                           ConstrainedBox(
+                                                                                                                                                  ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -91,7 +92,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                   ConstrainedBox(
+                                                                                                                                                                          ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -99,7 +100,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                   ConstrainedBox(
+                                                                                                                                                                          ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: maxChildWidth),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -107,14 +108,18 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                              ]),
                           ),
                         ),
-                                                                                                                                                                                                     ConstrainedBox(
+                                                                                                                                                                                                                                                   ConstrainedBox(
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
                                child: const Padding(
                                padding: EdgeInsets.all(8.0),
                                child: DropdownInputComponent<String>(labelText:'gender',items: ["Male","Female"],name: 'gender',),
                             ),
                          ),
-                                                                      ]
+                                                                                                                                                ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                     child: DatePickerComponent(fieldName: 'dateOfBirth', label: 'dateOfBirth'),
+                      )),
+                                                                                            ]
                   );
                 }
               )

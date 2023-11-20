@@ -23,6 +23,9 @@ class ElectricityEMRCController extends AppController {
   }
   @override
   Future<void> onSubmit() async {
+    formKey.currentState?.save();
+    formKey.currentState?.validate();
+    print("VALUE ${(formKey.currentState as FormBuilderState).value}");
       if(formKey.currentState!=null){
          formKey.currentState?.save();
          formKey.currentState?.validate();
