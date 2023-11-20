@@ -1,6 +1,6 @@
 #parse("include/entitiesNamesRef.vm")
 import 'dart:convert';
-
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -13,18 +13,22 @@ import '../../shared/controllers/app-controller.dart';
 class $formControllerName extends AppController {
   BuildContext context;
   late $formProviderName serviceProvider;
-  $formControllerName({required this.context}){
+  late GlobalKey<FormBuilderState> formKey;
+  $formControllerName({required this.context,required this.formKey}){
      // Initialize you providers .....
     serviceProvider = Provider.of<$formProviderName>(context,listen:false);
   }
   @override
   Future<String> initModule() async {
-         Map<String,dynamic> map = {};
-         for(String docKey in serviceProvider.getDocuments().keys){
-
-           map["delegacyDocumentStream"]=MultipartFile.fromBytes((serviceProvider.getDocument(docKey) as PlatformFile).bytes as Uint8List,filename:(serviceProvider.getDocument(docKey) as PlatformFile).name );
-         }
          return "";
   }
-
+  onSubmit(){
+      if(formKey.currentState!=null){
+         formKey.currentState?.save();
+         formKey.currentState?.validate();
+         if((formKey.currentState as FormBuilderState).isValid){
+          
+         }
+      }
+  }
 }

@@ -23,7 +23,7 @@ class BootComp extends StatelessWidget{
           appBar: AppBar(title: const Text("EMRC APP")),
           body:   const Padding(
               padding: EdgeInsets.only(left: 15,right: 15,top: 8,bottom: 8),
-              child   : ElectricityEMRCService()
+              child   : MineralsEMRCService()
           )
       ),
       supportedLocales: FormBuilderLocalizations.supportedLocales,

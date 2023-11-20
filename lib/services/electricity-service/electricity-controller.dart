@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:modee_emrc_app/shared/services/emrc-service.dart';
 import 'package:provider/provider.dart';
 import './electricity-provider.dart';
@@ -12,8 +13,8 @@ import '../../shared/controllers/app-controller.dart';
 class ElectricityEMRCController extends AppController {
   BuildContext context;
   late ElectricityEMRCProvider serviceProvider;
-  ElectricityEMRCController({required this.context}){
-     // Initialize you providers .....
+  late GlobalKey<FormBuilderState> formKey;
+  ElectricityEMRCController({required this.context,required this.formKey}){
     serviceProvider = Provider.of<ElectricityEMRCProvider>(context,listen:false);
   }
   @override
@@ -25,5 +26,12 @@ class ElectricityEMRCController extends AppController {
          // }
          return "";
   }
-
+  onSubmit(){
+    if(formKey.currentState!=null && (formKey.currentState as FormBuilderState).isValid){
+      formKey.currentState?.save();
+      print(formKey.currentState?.isValid);
+      formKey.currentState?.validate();
+      print("VALUE ${ formKey.currentState?.value}");
+    }
+  }
 }

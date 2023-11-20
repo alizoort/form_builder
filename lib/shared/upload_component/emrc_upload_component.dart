@@ -16,7 +16,8 @@ class UploadComponent extends StatefulWidget {
    final InputDecoration decoration;
    final String fieldName;
    final List<String? Function(PlatformFile?)> validators;
-   const UploadComponent({super.key,required this.fieldName,required this.label,this.decoration = kUploadInputDecoration,this.validators=const []});
+   final void Function(PlatformFile?)? onChanged;
+   const UploadComponent({super.key,required this.fieldName,required this.label,this.decoration = kUploadInputDecoration,this.validators=const [],this.onChanged});
 
   @override
   State<UploadComponent> createState() => _UploadComponentState();
@@ -33,6 +34,11 @@ class _UploadComponentState extends State<UploadComponent> {
   @override
   Widget build(BuildContext context) {
     return FormBuilderField<PlatformFile?>(
+      onChanged: (PlatformFile? file){
+        if(widget.onChanged!=null){
+          widget.onChanged!(file);
+        }
+      },
       name: widget.fieldName,
       validator: FormBuilderValidators.compose(widget.validators),
       builder: (FormFieldState<dynamic> field){

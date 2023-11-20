@@ -7,6 +7,6 @@ InputDecoration kTextInputDecoration = InputDecoration(
   border: kTextInputOutlineInputBorder
 );
 const kTextInputBorderRadius = BorderRadius.all(Radius.circular(8));
-const kTextInputFloatingLabelStyle = TextStyle(color: kTextInputFocusColor);
+const kTextInputFloatingLabelStyle = TextStyle(color: Colors.grey);
 const kTextInputOutlineInputBorder =  OutlineInputBorder(  borderSide: kTextInputBorderSide,borderRadius: kTextInputBorderRadius);
 final kFocusedTextInputOutlineInputBorder = kTextInputOutlineInputBorder.copyWith(borderSide: kTextInputBorderSide.copyWith(color: kTextInputFocusColor));

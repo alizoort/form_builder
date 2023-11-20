@@ -17,20 +17,16 @@ class ElectricityEMRCService extends StatefulWidget {
 }
 
 class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
-  bool autoValidate = true;
-  bool readOnly = false;
-  final _formKey = GlobalKey<FormBuilderState>();
-  void onChanged(dynamic val) => debugPrint(val.toString());
+  final formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
-    EMRCProvider emrcProvider = Provider.of<ElectricityEMRCProvider>(context);
     return FutureBuilder(
-      future: ElectricityEMRCController(context: context).initModule(),
+      future: ElectricityEMRCController(context: context,formKey:formKey).initModule(),
       builder: (BuildContext context,AsyncSnapshot<String> snapshot){
         return ListView(
         children: [
         FormBuilder(
-              key: _formKey,
+              key: formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               skipDisabled: true,
               child: LayoutBuilder(
@@ -69,11 +65,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
             ),
         ElevatedButton(
             onPressed: () {
-               _formKey.currentState?.save();
-               print(_formKey.currentState?.isValid);
-                _formKey.currentState?.validate();
-             print("VALUE ${ _formKey.currentState?.fields['formArray']?.value}");
-
+              ElectricityEMRCController(context:context,formKey: formKey).onSubmit();
             },
             child: const Text("Submit")
         )

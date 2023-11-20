@@ -8,7 +8,7 @@ class FormArrayComponent extends StatefulWidget {
   final String label;
   final InputDecoration decoration;
   final List<Widget> dynamicFields;
-  final List<String? Function(Map<String,dynamic>?)> validators;
+  final List<String? Function(List<Map<String,dynamic>>?)> validators;
   const FormArrayComponent({super.key,required this.fieldName,required this.label, this.validators=const [],this.decoration=kFormArrayInputDecoration,this.dynamicFields=const []});
 
   @override
@@ -23,14 +23,14 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
       field.didChange(null);
     }
     else {
-      Map<String,dynamic> map ={};
+      List<Map<String,dynamic>> formArrayRecords = [];
       formRecords.asMap().forEach((int index,FormBuilder formBuilder){
         FormBuilderState? state = getFormKey(formBuilder).currentState;
         if(state!=null){
-          map["form_$index"]= state.value;
+          formArrayRecords.add(state.value);
         }
       });
-      field.didChange(map);
+      field.didChange(formArrayRecords);
     }
   }
   save(){
@@ -45,14 +45,14 @@ class _FormArrayComponentState extends State<FormArrayComponent> {
   }
   @override
   Widget build(BuildContext context) {
-   return FormBuilderField<Map<String,dynamic>?>(
+   return FormBuilderField<List<Map<String,dynamic>>?>(
      key:formFieldKey,
-     onSaved: (Map<String,dynamic>? val){
+     onSaved: (List<Map<String,dynamic>>? val){
          save();
      },
      decoration:widget.decoration,
      name: widget.fieldName,
-     validator: FormBuilderValidators.compose([...widget.validators,(Map<String,dynamic>? val){
+     validator: FormBuilderValidators.compose([...widget.validators,(List<Map<String,dynamic>>? val){
        for(int index=0;index<formRecords.length;index++){
          if((formRecords[index].key as GlobalKey<FormBuilderState>).currentState!=null && !(((formRecords[index].key as GlobalKey<FormBuilderState>).currentState as FormBuilderState).isValid)){
            return "Invalid Form";
