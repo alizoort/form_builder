@@ -6,7 +6,7 @@ import 'package:modee_emrc_app/shared/dropdown/constants.dart';
 class DropdownInputComponent<T> extends StatefulWidget {
   final String name;
   final String labelText;
-  final List<DropdownMenuItem<T>> items;
+  final List<T> items;
   final InputDecoration decoration;
   final T? initialValue;
   final bool withReset;
@@ -39,7 +39,12 @@ class _DropdownInputComponentState<T> extends State<DropdownInputComponent<T>> {
         },
       ))
       ),
-      items: widget.items
+      items: widget.items.map((item) => DropdownMenuItem(
+        alignment: AlignmentDirectional.center,
+        value: item,
+        child: Text(item.toString()),
+      ))
+          .toList()
     );
   }
 }

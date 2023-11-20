@@ -111,7 +111,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
                                child: const Padding(
                                padding: EdgeInsets.all(8.0),
-                               child: DropdownInputComponent<String>(labelText:'gender',items: [],name: 'gender',),
+                               child: DropdownInputComponent<String>(labelText:'gender',items: ["Male","Female"],name: 'gender',),
                             ),
                          ),
                                                                       ]
