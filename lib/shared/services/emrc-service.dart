@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'app_service.dart';
-class EMRCService extends AppService {
+class EMRCRestService extends AppRestService {
   Future<Map<String,dynamic>> getAsyncHeaders()async {
     return  {};
   }
@@ -9,7 +9,5 @@ class EMRCService extends AppService {
   setHeaders()async {
     headers={}..addAll(await getAsyncHeaders());
   }
-  Future<dynamic> uploadCompanyData(FormData data)async {
-    return post('/public/company',data);
-  }
+
 }

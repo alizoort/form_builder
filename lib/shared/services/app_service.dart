@@ -4,7 +4,7 @@ import '../error-handler/emrc-error-handler.dart';
 import '../error-handler/error-handler.dart';
 import '../interceptors/app-interceptor.dart';
 
-abstract class AppService {
+abstract class AppRestService {
   Map<String,dynamic> headers ={};
   Dio? dio;
   late String baseUrl = EMRCConfig().eMRCBaseUrl;

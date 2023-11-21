@@ -150,10 +150,10 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                         ),
                                                                                                                                                                                                                                                                                              ConstrainedBox(
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
-                               child:  Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: DropdownInputComponent<Lookup>(key:UniqueKey(),labelText:'companyTypeId',items: [Lookup(id:1,code: "LEB",description:"lebanon"),
-                                 Lookup(id:2,code: "UK",description:"united kingdom")],name: 'companyTypeId',),
+                               child: Padding(
+                               padding: EdgeInsets.all(8.0),
+                               child: DropdownInputComponent<Lookup>(labelText:'companyTypeId',items: [Lookup(id: 1,code: "leb",description: "LEBANON"),
+                                 Lookup(id: 2,code: "mexico",description: "MEXICO")],name: 'companyTypeId',),
                             ),
                          ),
                                                                                                                             ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
