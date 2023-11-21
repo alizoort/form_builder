@@ -46,7 +46,7 @@ class _UploadComponentState extends State<UploadComponent> {
             decoration: widget.decoration.copyWith(labelText: widget.label,errorText: field.errorText),
             child: GestureDetector(
               onTap: ()async{
-                FilePickerResult? result = await PlatformUtilityService().pickFile();
+                FilePickerResult? result = await PlatformUtilityService().pickFile(false);
                 if (result != null) {
                   setUploadFile(field, result.files.first);
                 } else {

@@ -2,8 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 abstract class BasePlatformUtilityService {
-   Future<FilePickerResult?> pickFile(){
-    return FilePicker.platform.pickFiles(withData:true);
+   Future<FilePickerResult?> pickFile(bool allowMultiple){
+    return FilePicker.platform.pickFiles(withData:true,allowMultiple: allowMultiple);
   }
    Future<void> downloadFile(PlatformFile file);
    static showBottomSheet(BuildContext context,Widget bottomSheetWidget)async{

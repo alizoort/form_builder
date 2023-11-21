@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:modee_emrc_app/shared/multiselect-dropdown/multiselect-dropdown.dart';
+import 'package:modee_emrc_app/shared/multiselect-upload/multiselect-upload.dart';
 import 'package:modee_emrc_app/shared/searchable-dropdown/searchable-dropdown.dart';
 import 'package:modee_emrc_app/shared/text_input_component/emrc_text_input_component.dart';
 import 'package:modee_emrc_app/shared/upload_component/emrc_upload_component.dart';
@@ -28,6 +29,11 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
       docAccessor.setDocument(key,file);
     }
   };
+  void Function(List<PlatformFile>? files,String key,DocumentAccessor docAccessor) onMultiUploadChanged = (List<PlatformFile>? files,String key,DocumentAccessor docAccessor){
+    if(files!=null){
+      //docAccessor.setDocument(key,files);
+    }
+  };
   @override
   Widget build(BuildContext context) {
   
@@ -51,6 +57,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
               child: LayoutBuilder(
                 builder: (BuildContext context,BoxConstraints constraints){
                   final availableWidth = constraints.maxWidth;
+                  final availableHeight = constraints.maxHeight;
                   final maxChildWidth = availableWidth <400 ?availableWidth : availableWidth / 2;
                   return Wrap(
                       children: <Widget>[
@@ -153,15 +160,15 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                                                                                                                                                                                                                                                                                              ConstrainedBox(
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
                                child: Padding(
-                               padding: EdgeInsets.all(8.0),
+                               padding: const EdgeInsets.all(8.0),
                                child: MultiSelectDropdown<Lookup>(label:'companyTypeId',items: [Lookup(id: 1,code: "leb",description: "LEBANON"),
                                  Lookup(id: 2,code: "mexico",description: "MEXICO")],fieldName: 'companyTypeId',),
                             ),
                          ),
-                                                                                                                            ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth),child: Padding(
+                                                                                                                            ConstrainedBox(constraints: BoxConstraints(maxWidth: maxChildWidth,maxHeight: availableHeight),child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: UploadComponent (onChanged: (PlatformFile? file){
-                            onChanged(file,file.hashCode.toString(),emrcProvider);
+                          child: MultiSelectUpload (onChanged: (List<PlatformFile>? files){
+                            onMultiUploadChanged(files,files.hashCode.toString(),emrcProvider);
                           },fieldName:'delegacyDocumentStream',label:'delegacyDocumentStream',validators:[FormBuilderValidators.required()]),
                         )),
                                                                                                                                           ]
