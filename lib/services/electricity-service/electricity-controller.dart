@@ -29,6 +29,7 @@ class ElectricityEMRCController extends AppController {
       if(formKey.currentState!=null){
          formKey.currentState?.save();
          formKey.currentState?.validate();
+         print("VALUE ${formKey.currentState?.value}");
          if((formKey.currentState as FormBuilderState).isValid){
            Map<String,dynamic> formDataMap={};
            Map<String,dynamic> map = formKey.currentState?.value as Map<String,dynamic>;

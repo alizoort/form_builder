@@ -26,32 +26,42 @@ class _DropdownInputComponentState<T extends Lookup> extends State<DropdownInput
   @override
   Widget build(BuildContext context)  {
     print("WIDGET ${widget.items.map((item)=>item.id).toList()}");
-    return FormBuilderDropdown<T>(
-      onChanged: widget.onChanged,
-      validator: FormBuilderValidators.compose(widget.validator),
-      key: _dropdownFieldKey,
-      name: widget.name,
-      initialValue: widget.initialValue,
-      decoration: widget.decoration.copyWith(labelText: widget.labelText, suffix:  ConstrainedBox(constraints: const BoxConstraints(
-        maxWidth: 30.0,
-        maxHeight: 30
-      ),child:IconButton(
-        padding: const EdgeInsets.all(0),
-        icon: const Icon(Icons.close),
-        onPressed: () {
-          _dropdownFieldKey.currentState?.reset();
-        },
-      ))
-      ),
-      items: widget.items.map((item){
-        print("Item ${item.id}");
-        return  DropdownMenuItem(
-          alignment: AlignmentDirectional.center,
-          value: item,
-          child: Text(item.code),
-        );
-      })
-          .toList()
+    return Column(
+      children: [
+        TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Search',
+              border: OutlineInputBorder(),
+            )
+        ),
+        FormBuilderDropdown<T>(
+          onChanged: widget.onChanged,
+          validator: FormBuilderValidators.compose(widget.validator),
+          key: _dropdownFieldKey,
+          name: widget.name,
+          initialValue: widget.initialValue,
+          decoration: widget.decoration.copyWith(labelText: widget.labelText, suffix:  ConstrainedBox(constraints: const BoxConstraints(
+            maxWidth: 30.0,
+            maxHeight: 30
+          ),child:IconButton(
+            padding: const EdgeInsets.all(0),
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              _dropdownFieldKey.currentState?.reset();
+            },
+          ))
+          ),
+          items: widget.items.map((item){
+            print("Item ${item.id}");
+            return  DropdownMenuItem(
+              alignment: AlignmentDirectional.center,
+              value: item,
+              child: Text(item.code),
+            );
+          })
+              .toList()
+        ),
+      ],
     );
   }
 }

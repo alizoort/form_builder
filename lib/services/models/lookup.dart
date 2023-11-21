@@ -8,5 +8,9 @@ class Lookup {
 
   @override
   int get hashCode => super.hashCode;
+  @override
+  String toString(){
+    return "$code - $description";
+  }
   Lookup({required this.id,required this.description,required this.code});
 }
