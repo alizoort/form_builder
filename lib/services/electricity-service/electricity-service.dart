@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:modee_emrc_app/shared/multiselect-dropdown/multiselect-dropdown.dart';
 import 'package:modee_emrc_app/shared/searchable-dropdown/searchable-dropdown.dart';
 import 'package:modee_emrc_app/shared/text_input_component/emrc_text_input_component.dart';
 import 'package:modee_emrc_app/shared/upload_component/emrc_upload_component.dart';
@@ -153,7 +154,7 @@ class _ElectricityEMRCServiceState extends State<ElectricityEMRCService> {
                                constraints: BoxConstraints(maxWidth: maxChildWidth),
                                child: Padding(
                                padding: EdgeInsets.all(8.0),
-                               child: SearchableDropdown<Lookup>(label:'companyTypeId',items: [Lookup(id: 1,code: "leb",description: "LEBANON"),
+                               child: MultiSelectDropdown<Lookup>(label:'companyTypeId',items: [Lookup(id: 1,code: "leb",description: "LEBANON"),
                                  Lookup(id: 2,code: "mexico",description: "MEXICO")],fieldName: 'companyTypeId',),
                             ),
                          ),
