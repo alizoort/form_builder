@@ -16,6 +16,7 @@ class MultiSelectDropdown<T extends Lookup> extends StatefulWidget {
 }
 
 class _MultiSelectDropdownState<T extends Lookup> extends State<MultiSelectDropdown<T>> {
+  List<T> selectedItems =[];
   @override
   Widget build(BuildContext context) {
     return FormBuilderField<List<T>>(
@@ -25,6 +26,25 @@ class _MultiSelectDropdownState<T extends Lookup> extends State<MultiSelectDropd
       name: widget.fieldName,
       builder: (FormFieldState<List<T>> field){
         return DropdownSearch<T>.multiSelection(
+           selectedItems: selectedItems,
+            dropdownBuilder: (BuildContext context,List<T> items){
+              return Wrap(
+                spacing: 8.0,
+                runSpacing: 4.0,
+                children: items
+                    .map(
+                      (item) => Chip(
+                    label: Text(item.description),
+                    onDeleted: () {
+                 setState((){
+                    selectedItems =items.where((element) => element.id!=item.id ).toList();
+                 });
+                    },
+                  ),
+                )
+                    .toList(),
+              );
+            },
             compareFn: (T item1,T item2){
               return item1==item2;
             },
@@ -39,8 +59,11 @@ class _MultiSelectDropdownState<T extends Lookup> extends State<MultiSelectDropd
               showSelectedItems: true,
               showSearchBox: true,
             ),
-            onChanged: (List<T>? item){
-              field.didChange(item);
+            onChanged: (List<T>? items){
+          setState((){
+            field.didChange(items);
+            selectedItems = items ?? [];
+          });
             }
         );
       }
